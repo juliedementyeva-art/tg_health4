@@ -10,7 +10,7 @@ import os
 
 BOT_TOKEN="ВСТАВЬ_СЮДА_ТОКЕН"
 
-METRICS=["Энергия","Настроение","Тревога","Продуктивность"]
+METRICS=["Физическое здоровье","Эмоциональное здоровье","Эмоциональное здоровье","Духовное здоровье"]
 
 def keyboard(metric_index):
     rows=[]
@@ -52,10 +52,22 @@ async def click(update:Update, context:ContextTypes.DEFAULT_TYPE):
     else:
         await q.message.reply_text("Готово 🎉")
 
+import asyncio
+
 app=Application.builder().token(BOT_TOKEN).build()
+
 app.add_handler(CommandHandler("start",start))
 app.add_handler(CommandHandler("checkin",checkin))
 app.add_handler(CallbackQueryHandler(click))
 
 print("bot started")
-app.run_polling()
+
+async def main():
+    await app.initialize()
+    await app.start()
+    await app.updater.start_polling()
+
+    while True:
+        await asyncio.sleep(3600)
+
+asyncio.run(main())
