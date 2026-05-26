@@ -8,9 +8,9 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Cont
 from datetime import time
 import os
 
-BOT_TOKEN="ВСТАВЬ_СЮДА_ТОКЕН"
+BOT_TOKEN=os.getenv("BOT_TOKEN")
 
-METRICS=["Физическое здоровье","Эмоциональное здоровье","Эмоциональное здоровье","Духовное здоровье"]
+METRICS=["Физическое здоровье","Эмоциональное здоровье","Интеллектуальное здоровье","Духовное здоровье"]
 
 def keyboard(metric_index):
     rows=[]
